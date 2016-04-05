@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Overview of the Algorithms}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{K-means++}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{K-means||}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Implementation}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Sudo Code}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Data Simulation}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Testing}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Optimization}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Numba}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Cython}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{MapReduce and Hadoop}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Results}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Comparison of Numerical Results}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Comparison Clustering Arrangements}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{Comparison of Efficiency}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Conclusions}{}% 17
+\BOOKMARK [1][-]{section.7}{Appendix}{}% 18
