@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 APR 2016 19:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  16 APR 2016 13:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -291,11 +291,19 @@ LaTeX Info: Redefining \] on input line 2666.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/hypcap.sty
 Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 38.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count122
+\float@exts=\toks21
+\float@box=\box31
+\@float@everytoks=\toks22
+\@floatcapt=\box32
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
 
 
 Package hyperref Warning: Option `bookmarks' has already been used,
-(hyperref)                setting the option has no effect on input line 38.
+(hyperref)                setting the option has no effect on input line 40.
 
 (./Abstract_and_Subsections.aux
 
@@ -319,52 +327,52 @@ LaTeX Warning: Label `headings' multiply defined.
 )
 \openout1 = `Abstract_and_Subsections.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 46.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 48.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-\AtBeginShipoutBox=\box31
+\AtBeginShipoutBox=\box33
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
+\scratchcounter=\count123
 \scratchdimen=\dimen126
-\scratchbox=\box32
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count125
+\scratchbox=\box34
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count126
 \MPscratchDim=\dimen127
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks22
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks24
 )
-Package hyperref Info: Link coloring ON on input line 46.
+Package hyperref Info: Link coloring ON on input line 48.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count129
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
 
 (./Abstract_and_Subsections.out) (./Abstract_and_Subsections.out)
 \@outlinefile=\write3
@@ -387,77 +395,80 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 51.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 49.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 51.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 51.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 50.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+
+<images/clusterEx.png, id=76, 734.9859pt x 373.6359pt>
+File: images/clusterEx.png Graphic file (type png)
+
+<use images/clusterEx.png>
+Package pdftex.def Info: images/clusterEx.png used on input line 62.
+(pdftex.def)             Requested size: 284.52756pt x 144.63988pt.
  [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}pdfTeX wa
+rning (ext4): destination with the same identifier (name{figure.1}) has been al
+ready used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.68 
+      <./images/clusterEx.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 66.
+(hyperref)                removing `math shift' on input line 76.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 66.
+(hyperref)                removing `math shift' on input line 76.
 
-[2
-
-] [3
+[2] [3
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 124.
  [4
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 124.
  (./Abstract_and_Subsections.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 124.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 124.
+Package rerunfilecheck Info: File `Abstract_and_Subsections.out' has not change
+d.
+(rerunfilecheck)             Checksum: EF23ED229F9CC36E4B0855255CE8401E;1052.
 
-
-Package rerunfilecheck Warning: File `Abstract_and_Subsections.out' has changed
-.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Abstract_and_Subsections.out':
-(rerunfilecheck)             Before: 3285FF95167919020F343FF95DF5BE5D;1141
-(rerunfilecheck)             After:  EF23ED229F9CC36E4B0855255CE8401E;1052.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 124.
  ) 
 Here is how much of TeX's memory you used:
- 6561 strings out of 493089
- 94729 string characters out of 6134842
- 183473 words of memory out of 5000000
- 9955 multiletter control sequences out of 15000+600000
+ 6624 strings out of 493089
+ 95574 string characters out of 6134842
+ 185845 words of memory out of 5000000
+ 10011 multiletter control sequences out of 15000+600000
  14321 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,8n,39p,1303b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.7.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist
-/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/urw/times/utmri8a.pfb>
-Output written on Abstract_and_Subsections.pdf (4 pages, 67278 bytes).
+ 37i,8n,39p,1297b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
+ype1/urw/times/utmri8a.pfb>
+Output written on Abstract_and_Subsections.pdf (4 pages, 101299 bytes).
 PDF statistics:
  134 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+ 118 compressed objects within 2 object streams
  25 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
