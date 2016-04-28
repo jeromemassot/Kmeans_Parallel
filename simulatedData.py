@@ -1,4 +1,4 @@
-
+import numpy as np
 def generate_centers(k, var):
     """Generate k centers from 15-dimensional spherical Gaussian distribution with the given variance"""
     centers = np.random.multivariate_normal(np.zeros(15),  np.eye(15)*var, k)
