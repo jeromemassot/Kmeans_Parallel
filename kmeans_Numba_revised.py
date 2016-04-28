@@ -1,7 +1,9 @@
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
-import math
+import numba, math
+from numba import jit
+@jit
 
 #distance square
 def dist_sq(a, b):
