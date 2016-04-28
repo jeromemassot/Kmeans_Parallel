@@ -1,25 +1,21 @@
 
-import os
-import numpy as np
-import pandas as pd
-import random
+def generate_centers(k, var):
+    """Generate k centers from 15-dimensional spherical Gaussian distribution with the given variance"""
+    centers = np.random.multivariate_normal(np.zeros(15),  np.eye(15)*var, k)
+    return centers
 
-# set seed for reproducibility
-random.seed(32)
-
-#Data simulation - mixture of 3 binary normal distribution
-##distribution mean & covariance
-mean1 = np.array([3,5])
-mean2 = np.array([-2,3])
-mean3 = np.array([-6,-1])
-cov1 = np.array([[1,0],[0,2]])
-cov2 = np.array([[1,-0.6],[-0.6,1]])
-cov3 = np.array([[3,0.3],[0.3,1]])
-
-n = 2000
-N = 3*n
-data = np.vstack((np.random.multivariate_normal(mean1, cov1,n),np.random.multivariate_normal(mean2, cov2,n),
-                  np.random.multivariate_normal(mean3, cov3,n)))
-data = data[np.random.choice(range(N),size = N, replace=False),]
-df = pd.DataFrame(data,columns=["X","Y"])
-df.index = pd.Index(range(N))
+def generate_data(k, var):
+    """Generate data points around each center such that there are 10,000 data points total including the centers?
+    This could also be 10000 data points total plus the centers if this is better? Just chance the -k in 
+    the sampData line"""
+    # generate centers
+    centers = generate_centers(k, var)
+    # array to store points #
+    points = np.empty([1,15])
+    # generate data around each center
+    for i in range(k):
+        points = np.concatenate((points, np.random.multivariate_normal(centers[i],np.eye(15),10000)), axis=0)
+        points = np.delete(points, 0, axis=0)
+    # sample points from array and combine these with centers
+    sampData = np.concatenate((centers, points[np.random.choice(len(points),10000-k)]), axis = 0)
+    return(sampData)
