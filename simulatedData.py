@@ -12,7 +12,7 @@ def generate_data(k, var, dim):
     # generate centers
     centers = generate_centers(k, var, dim)
     # array to store points #
-    points = np.empty([1,2])
+    points = np.empty([1,dim])
     # generate data around each center
     for i in range(k):
         points = np.concatenate((points, np.random.multivariate_normal(centers[i],np.eye(dim),100000)), axis=0)
