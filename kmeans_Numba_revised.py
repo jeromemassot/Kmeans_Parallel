@@ -171,7 +171,7 @@ def getCentroids(dataSet, labels, k, d):
     # that centroid's label) you should randomly re-initialize it.
     data_new = DataFrame(dataSet.copy())
     data_new['Labels'] = labels
-    data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:2])
+    data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
     # if a centroid is empty, reinitialize it 
     if len(np.unique(labels))<k:
         diff=k-len(np.unique(labels))
