@@ -120,9 +120,8 @@ def kmeansparallel(data, k, l, d):
     
 #with the initialization of the centroids from the function kmeansplusplus
 #plug in the original data(dataSet), initializtions(initial) and the dimension of the data(d)
-def kmeans(dataSet, initial, d):
+def kmeans(dataSet, initial, k, d):
     centroids=initial
-    k=centroids.shape[0]
     # Initialize book keeping vars.
     iterations = 0
     oldCentroids = np.zeros(initial.shape)
