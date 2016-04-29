@@ -84,7 +84,7 @@ def kmeansplusplus(data, k, d):
 
 
 
-def kmeansparallel(data, k, l, d):
+def kmeansparallel(data, k, l, d, r):
     #step 1: sample a point uniformly at random from X
     index=int(np.random.choice(data.shape[0],1))
     centroid=np.array(data[index])
@@ -95,18 +95,19 @@ def kmeansparallel(data, k, l, d):
     iteration= log_cost(data_copy,centroid)
     
     #step 3: Get initial Centroids C
-    for number in range(iteration):
+    for round in range(r):
+        for number in range(iteration):
         #calculate phi_X(C)
-        distance=point_sq(data_copy,centroid)
+            distance=point_sq(data_copy,centroid)
         #calculate the probability
-        prob=dist_prob_parallel(distance,l).tolist()
-        for n in range(data_copy.shape[0]):
+            prob=dist_prob_parallel(distance,l).tolist()
+            for n in range(data_copy.shape[0]):
             #if the probability is greater than the random uniform
-            if prob[n]>np.random.uniform():
+                if prob[n]>np.random.uniform():
                 #add the point to C
-                centroid=np.vstack([centroid,np.array(data_copy[n])])
+                    centroid=np.vstack([centroid,np.array(data_copy[n])])
                 #delete that point from the copy
-                data_copy=np.delete(data_copy,n,axis=0)
+                    data_copy=np.delete(data_copy,n,axis=0)
     
     #step 4: calculate the weight probability
     w=weight_prob(data_copy,centroid)
