@@ -14,8 +14,8 @@ def generate_data(k, var):
     points = np.empty([1,15])
     # generate data around each center
     for i in range(k):
-        points = np.concatenate((points, np.random.multivariate_normal(centers[i],np.eye(15),10000)), axis=0)
+        points = np.concatenate((points, np.random.multivariate_normal(centers[i],np.eye(15),100000)), axis=0)
         points = np.delete(points, 0, axis=0)
     # sample points from array and combine these with centers
-    sampData = np.concatenate((centers, points[np.random.choice(len(points),10000-k)]), axis = 0)
+    sampData = np.concatenate((centers, points[np.random.choice(len(points),100000-k)]), axis = 0)
     return(sampData)
