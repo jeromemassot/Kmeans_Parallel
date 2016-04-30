@@ -10,7 +10,9 @@ def dist_sq(a, b, axis = 0):
 
 #minimum distance square for every point to the centroid
 def point_sq(data,centroid):
-    dist=[min(dist_sq(centroid, d, axis = 1)) for d in data]
+    dist=[]
+    for i in range(data.shape[0]):
+        dist.append(min(dist_sq(data[i],c) for c in centroid))
     return dist
 
 #calculate probability
