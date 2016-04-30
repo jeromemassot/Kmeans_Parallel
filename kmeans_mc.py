@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
-from pandas import DataFrame
 import numba, math
 from numba import jit
-
-@jit
+from pandas import DataFrame
+from multiprocessing import Pool, cpu_count
+from functools import partial
 
 #distance square
 def dist_sq(a, b):
@@ -16,9 +16,6 @@ def point_sq(data,centroid):
     dist=[min(dist_sq(d,c) for c in centroid) for d in data]
     return dist
         
-#calculate probability
-def dist_prob_plus(Dist):
-    return Dist/np.sum(Dist)
 
 #calculate probability
 def dist_prob_parallel(Dist,l):
@@ -26,15 +23,18 @@ def dist_prob_parallel(Dist,l):
 
 
 #step 2: calculate the cost and number of iterations(log(cost))
-def log_cost(data_copy,centroid):
-    cost=np.sum(point_sq(data_copy,centroid))
+def log_cost_mc(data_copy,centroid):
+    pool = Pool(processes=cpu_count())
+    # use partial function
+    min_dist_sq = partial(point_sq,centroid)
+    cost = np.sum(pool.map(min_dist_sq, data_copy))
     iteration=math.ceil(np.log(cost))
+    pool.close()
+    pool.terminate()
     return iteration
 
     
     
-#calculate weights
-#step 4: assign the weights
 #calculate weights
 #step 4: assign the weights
 def weight_prob(data_copy, centroid):
@@ -62,30 +62,6 @@ def reassign_centroids(centroid,k,d,w):
     return new_centroid
 
 
-def kmeansplusplus(data, k, d):
-    #make a copy of the data
-    data_copy=data.copy()
-    #step 1: sample a point uniformly at random from x
-    index=int(np.random.choice(data_copy.shape[0],1))
-    centroid=data_copy[index]
-    #once the centroid is determined, delete it from the copy 
-    data_copy=np.delete(data_copy,index,axis=0)
-    #step 2: while c<k, sample x from X with probability d^2/phi_x(C)
-    for number in range(k-1):
-        #calculate the square difference for every point in the copy to its nearest center
-        distance=point_sq(data_copy,centroid)
-        #calculate the probability
-        prob=dist_prob_plus(distance).tolist()
-        #randomly sample another centroid
-        index=int(np.random.choice(data_copy.shape[0],1,prob))
-        #add the new centroid
-        centroid=np.vstack([centroid,data_copy[index]])
-        #delete the new centroid from the copy
-        data_copy=np.delete(data_copy,index,axis=0)
-    return centroid
-
-
-
 def kmeansparallel(data, k, l, d, r):
     #step 1: sample a point uniformly at random from X
     index=int(np.random.choice(data.shape[0],1))
@@ -94,8 +70,9 @@ def kmeansparallel(data, k, l, d, r):
     data_copy=np.delete(data_copy,index,axis=0)
     
     #step 2: calculate number of iteration
-    iteration= log_cost(data_copy,centroid)
+    iteration= log_cost_mc(data_copy,centroid)
     
+    #step 3: Get initial Centroids C
     #step 3: Get initial Centroids C
     for round in range(r):
         for number in range(iteration):
@@ -165,9 +142,10 @@ def getLabels(dataSet, centroids):
 # Returns k random centroids, each of dimension n.
 def getCentroids(dataSet, labels, k, d):
     # Each centroid is the arithmetic mean of the points that
-    # have that centroid's label.
+    # have that centroid's label. Important: If a centroid is empty (no points have
     data_new = DataFrame(dataSet.copy())
     data_new['Labels'] = labels
     data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
   
     return data_new
+    
