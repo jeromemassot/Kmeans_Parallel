@@ -3,61 +3,60 @@ import pandas as pd
 from pandas import DataFrame
 import math
 
-#distance square
-def dist_sq(a, b):
-    return np.sum((a-b)**2)
+##calculate the distance square
+def dist_sq(a, b, axis = 0):
+    '''a,b are numpy arrays with the same shape'''
+    return np.sum((a-b)**2,axis)
+
 #minimum distance square for every point to the centroid
 def point_sq(data,centroid):
-    dist=[]
-    for i in range(data.shape[0]):
-        dist.append(min(dist_sq(data[i],c) for c in centroid))
+    dist=[min(dist_sq(centroid, d, axis = 1)) for d in data]
     return dist
-        
+
 #calculate probability
 def dist_prob_plus(Dist):
     return Dist/np.sum(Dist)
 
-#calculate probability
-def dist_prob_parallel(Dist,l):
-    return l*Dist/np.sum(Dist)
+##calculate the cost
+def cost(data,centroid):
+    '''The function caculates the sum of the distance square of each point in the data set to its closest centroid
+    parameters: data and centroids
+    output:cost(a number)
+    '''
+    return np.sum([min(dist_sq(centroid, d, axis = 1)) for d in data])
 
 
-#step 2: calculate the cost and number of iterations(log(cost))
-def log_cost(data_copy,centroid):
-    cost=np.sum(point_sq(data_copy,centroid))
-    iteration=math.ceil(np.log(cost))
-    return iteration
+##calculate the parallel probability
+def dist_prob_parallel(data,centroid,l):
+    '''The function caculates the sum of the distance square to the closest centroid for each point in the data set
+    parameters: data and centroids
+    output:probability with length=len(data)
+    '''
+    phi= cost(data,centroid)
+    return np.array([(min(dist_sq(centroid, d, axis = 1)))*l/phi for d in data])
+
 
     
-    
-#calculate weights
-#step 4: assign the weights
-def weight_prob(data_copy, centroid):
-    w_size=centroid.shape[0]
-    w=np.zeros(w_size)
-    for i in range(data_copy.shape[0]):
-        index_w=np.argmin(list(dist_sq(data_copy[i],c) for c in centroid))
-        w[index_w]=w[index_w]+1
-    return w
-
+#weight probability
+def weight_prob(data,centroid):
+    closest_center = [np.argmin(dist_sq(centroid, d, axis = 1)) for d in data]
+    ## number of points which is closest to each s in c
+    number_= np.array([closest_center.count(i) for i in range(len(centroid))]).astype(float)
+    ## return normalized weight
+    return number_/np.sum(number_)
 
 
 #step 5: recluster the weighted points in C into k clusters
 #reinitialize k centroids
-def reassign_centroids(centroid,k,d,w):
-    new_centroid=np.zeros([k,d])
-    for cluster in range(k):
-        #according to the weights from step 4, calculate the probability that a point is sampled from C
-        prob_w=list(w/sum(w))
-        #sample a new centroid
-        new_index=np.random.choice(centroid.shape[0],1,prob_w)
-        #store the new centroid
-        new_centroid[cluster]=centroid[new_index]
-        #delete the new centroid from the centroid
-        centroid=np.delete(centroid,new_index,axis=0)
-        #delete the correponding weight
-        w=np.delete(w,new_index,axis=0)
-    return new_centroid
+def reassign_centroids(data,centroid,k,l,w):
+    new_centroids = data[np.random.choice(range(len(centroid)),size=1,p=w),]
+    potential_centroids = centroid
+    for i in range(k-1):
+        prob = dist_prob_parallel(potential_centroids,new_centroids,l) * w
+        new_centroid = data[np.random.choice(range(len(centroid)),size=1,p=prob/np.sum(prob)),]
+        new_centroids = np.vstack((new_centroids,new_centroid))
+    return new_centroids
+
 
 
 def kmeansplusplus(data, k, d):
@@ -84,40 +83,27 @@ def kmeansplusplus(data, k, d):
 
 
 
-def kmeansparallel(data, k, l, d, r):
+def kmeansparallel(data, k, l, r):
     #step 1: sample a point uniformly at random from X
-    index=int(np.random.choice(data.shape[0],1))
-    centroid=np.array(data[index])
-    data_copy=data.copy()
-    data_copy=np.delete(data_copy,index,axis=0)
+    centroid=np.array(data[np.random.choice(range(len(data)),1),])
     
     #step 2: calculate number of iteration
-    iteration= log_cost(data_copy,centroid)
+    iteration= np.ceil(np.log(cost(data,centroid))).astype(int)  
     
-    for rounds in range(r):
-        
     #step 3: Get initial Centroids C
-        for number in range(iteration):
-            #calculate phi_X(C)
-            distance=point_sq(data_copy,centroid)
-            #calculate the probability
-            prob=dist_prob_parallel(distance,l).tolist()
-            for n in range(data_copy.shape[0]):
-                #if the probability is greater than the random uniform
-                if prob[n]>np.random.uniform():
-                    #add the point to C
-                    centroid=np.vstack([centroid,np.array(data_copy[n])])
-                    #delete that point from the copy
-                    data_copy=np.delete(data_copy,n,axis=0)
+    for round in range(r):
+        for i in range(iteration):
+            centroid_added = data[dist_prob_parallel(data,centroid,l)>np.random.uniform(size = len(data)),]
+            centroid = np.vstack((centroid,centroid_added))  
     
     #step 4: calculate the weight probability
-    w=weight_prob(data_copy,centroid)
+    w=weight_prob(data,centroid)
     
     #step 5: recluster the weighted points in C into k clusters
     #reinitialize k centroids
-    new_centroids=reassign_centroids(centroid,k,d,w)
+    final_centroids=reassign_centroids(data,centroid,k,l,w)
     
-    return new_centroids
+    return final_centroids
 
     
 #with the initialization of the centroids from the function kmeansplusplus
@@ -167,13 +153,9 @@ def getLabels(dataSet, centroids):
 def getCentroids(dataSet, labels, k, d):
     # Each centroid is the arithmetic mean of the points that
     # have that centroid's label. Important: If a centroid is empty (no points have
-    # that centroid's label) you should randomly re-initialize it.
     data_new = DataFrame(dataSet.copy())
     data_new['Labels'] = labels
     data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
-    # if a centroid is empty, reinitialize it 
-    if len(np.unique(labels))<k:
-        diff=k-len(np.unique(labels))
-        data_new=np.vstack([data_new,np.random.random([diff,d])])    
+  
     return data_new
     
