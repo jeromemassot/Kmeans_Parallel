@@ -8,11 +8,11 @@ from numba import jit
 #distance square
 def dist_sq(a, b):
     return np.sum((a-b)**2)
+
+
 #minimum distance square for every point to the centroid
 def point_sq(data,centroid):
-    dist=[]
-    for i in range(data.shape[0]):
-        dist.append(min(dist_sq(data[i],c) for c in centroid))
+    dist=[min(dist_sq(d,c) for c in centroid) for d in data]
     return dist
         
 #calculate probability
@@ -86,7 +86,7 @@ def kmeansplusplus(data, k, d):
 
 
 
-def kmeansparallel(data, k, l, d):
+def kmeansparallel(data, k, l, d, r):
     #step 1: sample a point uniformly at random from X
     index=int(np.random.choice(data.shape[0],1))
     centroid=np.array(data[index])
@@ -97,18 +97,19 @@ def kmeansparallel(data, k, l, d):
     iteration= log_cost(data_copy,centroid)
     
     #step 3: Get initial Centroids C
-    for number in range(iteration):
+    for round in range(r):
+        for number in range(iteration):
         #calculate phi_X(C)
-        distance=point_sq(data_copy,centroid)
+            distance=point_sq(data_copy,centroid)
         #calculate the probability
-        prob=dist_prob_parallel(distance,l).tolist()
-        for n in range(data_copy.shape[0]):
+            prob=dist_prob_parallel(distance,l).tolist()
+            for n in range(data_copy.shape[0]):
             #if the probability is greater than the random uniform
-            if prob[n]>np.random.uniform():
+                if prob[n]>np.random.uniform():
                 #add the point to C
-                centroid=np.vstack([centroid,np.array(data_copy[n])])
+                    centroid=np.vstack([centroid,np.array(data_copy[n])])
                 #delete that point from the copy
-                data_copy=np.delete(data_copy,n,axis=0)
+                    data_copy=np.delete(data_copy,n,axis=0)
     
     #step 4: calculate the weight probability
     w=weight_prob(data_copy,centroid)
@@ -122,9 +123,8 @@ def kmeansparallel(data, k, l, d):
     
 #with the initialization of the centroids from the function kmeansplusplus
 #plug in the original data(dataSet), initializtions(initial) and the dimension of the data(d)
-def kmeans(dataSet, initial, d):
+def kmeans(dataSet, initial, k, d):
     centroids=initial
-    k=centroids.shape[0]
     # Initialize book keeping vars.
     iterations = 0
     oldCentroids = np.zeros(initial.shape)
@@ -157,24 +157,17 @@ def shouldStop(oldCentroids, centroids, iterations):
 def getLabels(dataSet, centroids):
     # For each element in the dataset, chose the closest centroid. 
     # Make that centroid the element's label.
-    l=[]
-    for i in range(dataSet.shape[0]):
-        #arg min as the label
-        l.append(np.argmin(list(dist_sq(dataSet[i],c) for c in centroids)))
+    
+    l=[np.argmin(list(dist_sq(d,c) for c in centroids)) for d in dataSet]
     return l
 # Function: Get Centroids
 # -------------
 # Returns k random centroids, each of dimension n.
 def getCentroids(dataSet, labels, k, d):
     # Each centroid is the arithmetic mean of the points that
-    # have that centroid's label. Important: If a centroid is empty (no points have
-    # that centroid's label) you should randomly re-initialize it.
+    # have that centroid's label.
     data_new = DataFrame(dataSet.copy())
     data_new['Labels'] = labels
     data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
-    # if a centroid is empty, reinitialize it 
-    if len(np.unique(labels))<k:
-        diff=k-len(np.unique(labels))
-        data_new=np.vstack([data_new,np.random.random([diff,d])])    
+  
     return data_new
-    

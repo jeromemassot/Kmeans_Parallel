@@ -163,7 +163,7 @@ def getLabels(dataSet, centroids):
 # Returns k random centroids, each of dimension n.
 def getCentroids(dataSet, labels, k, d):
     # Each centroid is the arithmetic mean of the points that
-    # have that centroid's label. Important: If a centroid is empty (no points have
+    # have that centroid's label.
     data_new = DataFrame(dataSet.copy())
     data_new['Labels'] = labels
     data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
