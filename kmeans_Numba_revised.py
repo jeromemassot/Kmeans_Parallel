@@ -34,12 +34,11 @@ def log_cost(data_copy,centroid):
     
 #calculate weights
 #step 4: assign the weights
+#calculate weights
+#step 4: assign the weights
 def weight_prob(data_copy, centroid):
-    w_size=centroid.shape[0]
-    w=np.zeros(w_size)
-    for i in range(data_copy.shape[0]):
-        index_w=np.argmin(list(dist_sq(data_copy[i],c) for c in centroid))
-        w[index_w]=w[index_w]+1
+    weight=[np.argmin(list(dist_sq(d,c) for c in centroid)) for d in data_copy]
+    w=np.array([weight.count(i) for i in range(len(data_copy))])
     return w
 
 
