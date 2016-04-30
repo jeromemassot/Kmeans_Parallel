@@ -6,11 +6,11 @@ import math
 #distance square
 def dist_sq(a, b):
     return np.sum((a-b)**2)
+
+
 #minimum distance square for every point to the centroid
 def point_sq(data,centroid):
-    dist=[]
-    for i in range(data.shape[0]):
-        dist.append(min(dist_sq(data[i],c) for c in centroid))
+    dist=[min(dist_sq(d,c) for c in centroid) for d in data]
     return dist
         
 #calculate probability
@@ -155,10 +155,8 @@ def shouldStop(oldCentroids, centroids, iterations):
 def getLabels(dataSet, centroids):
     # For each element in the dataset, chose the closest centroid. 
     # Make that centroid the element's label.
-    l=[]
-    for i in range(dataSet.shape[0]):
-        #arg min as the label
-        l.append(np.argmin(list(dist_sq(dataSet[i],c) for c in centroids)))
+    
+    l=[np.argmin(list(dist_sq(d,c) for c in centroids)) for d in dataSet]
     return l
 # Function: Get Centroids
 # -------------
@@ -171,4 +169,3 @@ def getCentroids(dataSet, labels, k, d):
     data_new = np.array(data_new.groupby(['Labels']).mean().iloc[:,:d])
   
     return data_new
-    
